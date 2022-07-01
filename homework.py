@@ -36,9 +36,9 @@ class Training:
         self.weight = weight
 
     def get_distance(self) -> float:
-        """Получить дистанцию в км.""" 
-        return (self.action * self.LEN_STEP) / Training.M_IN_KM 
-        
+        """Получить дистанцию в км."""
+        return (self.action * self.LEN_STEP) / Training.M_IN_KM
+
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
         return self.get_distance() / self.duration
@@ -62,7 +62,7 @@ class Running(Training):
     def get_spent_calories(self) -> float:
         get_spent_calories = ((Running.COEFF_CALORIE_1 * self.get_mean_speed()
                                - Running.COEFF_CALORIE_2) * self.weight
-                              / Training.M_IN_KM * self.duration 
+                              / Training.M_IN_KM * self.duration
                               * self.MIN_IN_HOUR)
         return get_spent_calories
 
@@ -85,7 +85,7 @@ class SportsWalking(Training):
     def get_spent_calories(self) -> float:
         spent_cal = ((SportsWalking.COEFF_CALORIE_1 * self.weight
                      + (self.get_mean_speed()**SportsWalking.COEFF_CALORIE_2
-                      // self.height) * SportsWalking.COEFF_CALORIE_3 
+                      // self.height) * SportsWalking.COEFF_CALORIE_3
                      * self.weight)
                      * (self.duration * self.MIN_IN_HOUR))
         return spent_cal
@@ -143,4 +143,3 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-
